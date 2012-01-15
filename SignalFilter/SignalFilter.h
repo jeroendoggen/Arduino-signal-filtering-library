@@ -25,27 +25,27 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA  *
  ******************************************************************************/
 
-#ifndef Filter_h
-#define Filter_h
+#ifndef SignalFilter_h
+#define SignalFilter_h
 #include <Arduino.h>
 
-class Filter
+class SignalFilter
 {
 	public:
-		Filter();
+		SignalFilter();
 		void begin();
 		
  		void setFilter(char filter);  //'c' -> Chebyshev, 'b' -> Bessel
  		void setOrder(int order);     // only 1 or 2
 		
-		int filter(int data);
+		int run(int data);
 		
 	private:
 		
  		char _filter;
  		int _order;
 				
-		short _v[3];
+		short _v[2];
 };
 #endif
 

@@ -1,6 +1,6 @@
-#include <Filter.h>
+#include <SignalFilter.h>
 
-Filter filt;
+SignalFilter Filter;
 
 int value;
 int filtered;
@@ -8,15 +8,15 @@ int filtered;
 void setup()
 {
   Serial.begin(9600);
-  filt.begin();
-  filt.setFilter('c');
-  filt.setOrder(1);
+  Filter.begin();
+  Filter.setFilter('b');
+  Filter.setOrder(1);
 }
 
 void loop()
 {
   value = analogRead(A0);
-  filtered= filt.filter(value);
+  filtered= Filter.run(value);
   Serial.print("In: ");
   Serial.print(value);  
   Serial.print(" - Out: ");

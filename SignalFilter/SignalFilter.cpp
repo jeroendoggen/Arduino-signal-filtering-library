@@ -19,24 +19,24 @@
  ******************************************************************************/
 
 /// <summary>
-/// Filter - Library to Filter Sensor Data using digital filters
+/// SignalFilter - Library to Filter Sensor Data using digital filters
 /// Available filters: Chebyshev & Bessel low pass filter (1st & 2nd order) 
 /// </summary>
 
 #include <Arduino.h>
-#include <Filter.h>
+#include <SignalFilter.h>
 
 /// <summary>
 /// Constructor
 /// </summary>
-Filter::Filter()
+SignalFilter::SignalFilter()
 {
 }
 
 /// <summary>
 /// Begin function: set default filter options
 /// </summary>
-void Filter::begin()
+void SignalFilter::begin()
 {
 	setFilter('c');
 	setOrder(1);
@@ -45,7 +45,7 @@ void Filter::begin()
 /// <summary>
 /// setFilter(char filter): Select filter: 'c' -> Chebyshev, 'b' -> Bessel
 /// </summary>
-void Filter::setFilter(char filter)
+void SignalFilter::setFilter(char filter)
 {
 	_filter=filter;
 }
@@ -53,7 +53,7 @@ void Filter::setFilter(char filter)
 /// <summary>
 /// selectOrder(int order): Select filter order (1 or 2)
 /// </summary>
-void Filter::setOrder(int order)
+void SignalFilter::setOrder(int order)
 {
 	_order=order;
 }
@@ -61,7 +61,7 @@ void Filter::setOrder(int order)
 /// <summary>
 /// filter: Runs the actual filter: input=rawdata, output=filtered data
 /// </summary>
-int Filter::filter(int data)
+int SignalFilter::run(int data)
 {
 	// 	Uncomment for debugging
 	// 	Serial.println(_filter);
