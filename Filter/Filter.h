@@ -35,8 +35,8 @@ class Filter
 		Filter();
 		void begin();
 		
- 		void setFilter(char filter);
- 		void setOrder(int order);
+ 		void setFilter(char filter);  //'c' -> Chebyshev, 'b' -> Bessel
+ 		void setOrder(int order);     // only 1 or 2
 		
 		int filter(int data);
 		
