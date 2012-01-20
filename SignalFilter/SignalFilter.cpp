@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Filter.h - Arduino library to Filter Sensor Data                            *
- * Copyright 2011 Jeroen Doggen (jeroendoggen@gmail.com)                       *
+ * Copyright 2012 Jeroen Doggen (jeroendoggen@gmail.com)                       *
  * For more information: variable declaration, changelog,... see Filter.h      *
  *******************************************************************************
  * This library is free software; you can redistribute it and/or               *

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Filter.h - Arduino library to Filter Sensor Data                            *
- * Copyright 2011 Jeroen Doggen (jeroendoggen@gmail.com)                       *
+ * Copyright 2012 Jeroen Doggen (jeroendoggen@gmail.com)                       *
  *   Chebyshev & Bessel filter code and parameters by Jurgen Schwietering      *
  *   http://www.schwietering.com/jayduino/filtuino                             *
  *******************************************************************************
