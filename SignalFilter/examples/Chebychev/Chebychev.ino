@@ -18,8 +18,8 @@ void loop()
   value = analogRead(A0);
   filtered= Filter.run(value);
   Serial.print("In: ");
-  Serial.print(value);  
+  Serial.print(value);
   Serial.print(" - Out: ");
-  Serial.println(filtered);  
-  delay(500); //make it readable
-} 
+  Serial.println(filtered);
+  delay(500);                                     //make it readable
+}
