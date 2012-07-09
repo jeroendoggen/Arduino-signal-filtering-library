@@ -43,6 +43,6 @@ class SignalFilter
     char _filter;
     int _order;
 
-    short _v[2];
+    short _v[3];
 };
 #endif
