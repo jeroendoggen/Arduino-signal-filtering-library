@@ -36,6 +36,7 @@ class SignalFilter
 
     void setFilter(char filter);                  //'c' -> Chebyshev, 'b' -> Bessel
     void setOrder(int order);                     // only 1 or 2
+    void printSamples();
 
     int run(int data);
 
@@ -45,6 +46,8 @@ class SignalFilter
     int _order;
     int _average;
     int _median;
+    int _helper;
+    int _counter;
 
     short _v[3];
 };

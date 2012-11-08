@@ -35,7 +35,7 @@ void SignalFilter::begin()
   _v[0]=0;
   _v[1]=0;
   _v[2]=0;
-  _v[3]=0;
+  _helper=0;
 }
 
 /// setFilter(char filter): Select filter: 'c' -> Chebyshev, 'b' -> Bessel
@@ -50,14 +50,28 @@ void SignalFilter::setOrder(int order)
   _order=order;
 }
 
+///
+void SignalFilter::printSamples()
+{
+  Serial.print(" ");
+  Serial.print(_v[2]);
+
+  Serial.print(" ");
+  Serial.print(_v[1]);
+
+  Serial.print(" ");
+  Serial.print(_v[0]);
+  Serial.print(" - ");
+}
+
 /// filter: Runs the actual filter: input=rawdata, output=filtered data
 int SignalFilter::run(int data)
 {
-// 	Uncomment for debugging
-// 	Serial.println(_filter);
-//	Serial.println(_order);
+//  Uncomment for debugging
+//  Serial.println(_filter);
+//  Serial.println(_order);
 /// Chebyshev filters
-  if(_filter=='c')                                
+  if(_filter=='c')
   {
     if(_order==1)                                 //ripple -3dB
     {
@@ -90,88 +104,187 @@ int SignalFilter::run(int data)
     if(_order==1)                                 //Alpha Low 0.1
     {
       _v[0] = _v[1];
-      long tmp = ((((data * 2057199L) >>  3)        //= (    2.452372753e-1 * x)
-        + ((_v[0] * 1068552L) >> 1)                 //+(  0.5095254495*v[0])
-        )+524288) >> 20;                            // round and downshift fixed point /1048576
+      long tmp = ((((data * 2057199L) >>  3)      //= (    2.452372753e-1 * x)
+        + ((_v[0] * 1068552L) >> 1)               //+(  0.5095254495*v[0])
+        )+524288) >> 20;                          // round and downshift fixed point /1048576
       _v[1]= (short)tmp;
-      return (short)(((_v[0] + _v[1])));            // 2^
+      return (short)(((_v[0] + _v[1])));          // 2^
     }
-    if(_order==2)                                   //Alpha Low 0.1
+    if(_order==2)                                 //Alpha Low 0.1
     {
       _v[0] = _v[1];
       _v[1] = _v[2];
-      long tmp = ((((data * 759505L) >>  4)         //= (    9.053999670e-2 * x)
-        + ((_v[0] * -1011418L) >> 3)                //+( -0.2411407388*v[0])
-        + ((_v[1] * 921678L) >> 1)                  //+(  0.8789807520*v[1])
-        )+262144) >> 19;                            // round and downshift fixed point /524288
+      long tmp = ((((data * 759505L) >>  4)       //= (    9.053999670e-2 * x)
+        + ((_v[0] * -1011418L) >> 3)              //+( -0.2411407388*v[0])
+        + ((_v[1] * 921678L) >> 1)                //+(  0.8789807520*v[1])
+        )+262144) >> 19;                          // round and downshift fixed point /524288
 
       _v[2]= (short)tmp;
-      return (short)(((_v[0] + _v[2])+2 * _v[1]));  // 2^
+      return (short)(((_v[0] + _v[2])+2 * _v[1]));// 2^
     }
   }
-  
-/// Median filters
-    if(_filter=='m')  // New filters
+
+/// Median filters (78 bytes, 12 microseconds)
+  if(_filter=='m')                                // New filters
+  {
+// Note:
+//  quick & dirty dumb implementation that only keeps 3 samples: probably better to do insertion sort when more samples are needed in the calculation
+//   or Partial sort: http://en.cppreference.com/w/cpp/algorithm/nth_element
+// On better inspection of this code... performance seem quite good
+// TODO: compare with: http://embeddedgurus.com/stack-overflow/tag/median-filter/
+    _v[0] = _v[1];
+    _v[1] = _v[2];
+    _v[2]= data;
+
+//       printSamples();
+
+    if (_v[2] < _v[1])
     {
-     // Note: 
-     //  quick & dirty dumb implementation that only keeps 3 samples: probably better to do insertion sort when more samples are needed in the calculation
-     //   or Partial sort: http://en.cppreference.com/w/cpp/algorithm/nth_element
-    if(_order==2)                                  
-    {
-      _v[0] = _v[1];
-      _v[1] = _v[2];
-      _v[2]= data;
-      
-      if (_v[2] < _v[1])
+      if (_v[2] < _v[0])
       {
-        if (_v[2] < _v[0])
+        if (_v[1] < _v[0])
         {
-          if (_v[1] < _v[0])
-          {
-            _median = _v[1];
-          }
-          else
-          {
-            _median = _v[0];
-          } 
+          _median = _v[1];
         }
         else
         {
-          _median = _v[2]; 
+          _median = _v[0];
         }
       }
       else
       {
-        if (_v[2] < _v[0])
+        _median = _v[2];
+      }
+    }
+    else
+    {
+      if (_v[2] < _v[0])
+      {
+        _median = _v[2];
+      }
+      else
+      {
+        if (_v[1] < _v[0])
         {
-            _median = _v[2];
+          _median = _v[0];
         }
         else
         {
-          if (_v[1] < _v[0])
-          {
-            _median = _v[0];
-          }
-          else
-          {
-            _median = _v[1];
-          }
+          _median = _v[1];
         }
       }
-//    Serial.print(" ");
-//    Serial.print(_v[2]);
-//     
-//    Serial.print(" ");
-//    Serial.print(_v[1]);
-//     
-//    Serial.print(" ");
-//    Serial.print(_v[0]);
-//     
-//    Serial.print(" Median:");
-//    Serial.println(_median);
-//     return (_median);
     }
-    }
-   
-}
+    return (_median);
+  }
 
+//
+/// Median filter (148 bytes, 12 microseconds)
+// less efficient, but more readable?
+  if(_filter=='n')
+  {
+    _v[0] = _v[1];
+    _v[1] = _v[2];
+    _v[2]= data ;
+
+//printSamples();
+
+    if( ((_v[2] < _v[1]) && (_v[2] > _v[0])) ||(( _v[2] < _v[0]) && (_v[2] > _v[1])))
+      return (_v[2]);
+
+    if( (_v[1] < _v[2] && _v[1] > _v[0]) ||( _v[1] < _v[0] && _v[1] > _v[2]))
+      return (_v[1]);
+
+    if( (_v[0] < _v[2] && _v[0] > _v[1]) ||( _v[0] < _v[1] && _v[0] > _v[2]))
+      return (_v[0]);
+  }
+  
+/// Median filter (78 bytes, 12 microseconds)
+// based on: http://embeddedgurus.com/stack-overflow/tag/median-filter/
+// same code size as my median filter code
+
+  if(_filter=='0')
+  {
+    _v[0] = _v[1];
+    _v[1] = _v[2];
+    _v[2]= data ;
+    
+    int middle;
+
+    if ((_v[0] <= _v[1]) && (_v[0] <= _v[2]))
+    {
+      middle = (_v[1] <= _v[2]) ? _v[1] : _v[2];
+    }
+    else if ((_v[1] <= _v[0]) && (_v[1] <= _v[2]))
+    {
+      middle = (_v[0] <= _v[2]) ? _v[0] : _v[2];
+    }
+    else
+    {
+      middle = (_v[0] <= _v[1]) ? _v[0] : _v[1];
+    }
+    return middle;
+  }
+  
+//
+/// Growing-shrinking filter (fast)
+  if(_filter=='g')                                // New filters
+  {
+    if (data > _helper)
+    {
+      if (data > _helper+512)
+        _helper=_helper+512;
+      if (data > _helper+128)
+        _helper=_helper+128;
+      if (data > _helper+32)
+        _helper=_helper+32;
+      if (data > _helper+8)
+        _helper=_helper+8;
+      _helper++;
+    }
+    else if (data < _helper)
+    {
+      if (data < _helper-512)
+        _helper=_helper-512;
+      if (data < _helper-128)
+        _helper=_helper-128;
+      if (data < _helper-32)
+        _helper=_helper-32;
+      if (data < _helper-8)
+        _helper=_helper-8;
+      _helper--;
+    }
+    return _helper;
+  }
+/// Growing-shrinking filter (smoother)
+  if(_filter=='h')                                // New filters
+  {
+    if (data > _helper)
+    {
+      if (data > _helper+8)
+      {
+        _counter++;
+        _helper=_helper + 8 * _counter;
+      }
+      _helper++;
+    }
+    else if (data < _helper)
+    {
+      if (data < _helper-8)
+      {
+        _counter++;
+        _helper=_helper- 8 * _counter;
+      }
+      _helper--;
+    }
+
+    if (_counter > 10)
+    {
+      _counter=0;
+    }
+    Serial.print(" counter: ");
+    Serial.print(_counter);
+    Serial.print("  ");
+    return _helper;
+  }
+
+}
