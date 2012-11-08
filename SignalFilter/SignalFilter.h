@@ -5,9 +5,10 @@
 //
 // Version History:
 //  Version 0.1: Low pass filters: chebyshev, bessel (1st & 2nd order)
+//  Version 0.2: Median filter
 // Roadmap
-//  Version 0.2: Variable Length Running Average
-//  Version 0.3: Kalman Filter
+//  Version 0.3: Variable Length Running Average
+//  Version 0.4: Kalman Filter
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -42,6 +43,8 @@ class SignalFilter
 
     char _filter;
     int _order;
+    int _average;
+    int _median;
 
     short _v[3];
 };

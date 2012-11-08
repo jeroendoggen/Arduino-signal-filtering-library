@@ -32,6 +32,10 @@ void SignalFilter::begin()
 {
   setFilter('c');
   setOrder(1);
+  _v[0]=0;
+  _v[1]=0;
+  _v[2]=0;
+  _v[3]=0;
 }
 
 /// setFilter(char filter): Select filter: 'c' -> Chebyshev, 'b' -> Bessel
@@ -51,8 +55,9 @@ int SignalFilter::run(int data)
 {
 // 	Uncomment for debugging
 // 	Serial.println(_filter);
-// 	Serial.println(_order);
-  if(_filter=='c')                                // Chebyshev filters
+//	Serial.println(_order);
+/// Chebyshev filters
+  if(_filter=='c')                                
   {
     if(_order==1)                                 //ripple -3dB
     {
@@ -78,26 +83,95 @@ int SignalFilter::run(int data)
         +2 * _v[1]));                             // 2^
     }
   }
-  if(_filter=='b')                                // Bessel filters
-    if(_order==1)                                 //Alpha Low 0.1
-  {
-    _v[0] = _v[1];
-    long tmp = ((((data * 2057199L) >>  3)        //= (    2.452372753e-1 * x)
-      + ((_v[0] * 1068552L) >> 1)                 //+(  0.5095254495*v[0])
-      )+524288) >> 20;                            // round and downshift fixed point /1048576
-    _v[1]= (short)tmp;
-    return (short)(((_v[0] + _v[1])));            // 2^
-  }
-  if(_order==2)                                   //Alpha Low 0.1
-  {
-    _v[0] = _v[1];
-    _v[1] = _v[2];
-    long tmp = ((((data * 759505L) >>  4)         //= (    9.053999670e-2 * x)
-      + ((_v[0] * -1011418L) >> 3)                //+( -0.2411407388*v[0])
-      + ((_v[1] * 921678L) >> 1)                  //+(  0.8789807520*v[1])
-      )+262144) >> 19;                            // round and downshift fixed point /524288
 
-    _v[2]= (short)tmp;
-    return (short)(((_v[0] + _v[2])+2 * _v[1]));  // 2^
+/// Bessel filters
+  if(_filter=='b')                                // Bessel filters
+  {
+    if(_order==1)                                 //Alpha Low 0.1
+    {
+      _v[0] = _v[1];
+      long tmp = ((((data * 2057199L) >>  3)        //= (    2.452372753e-1 * x)
+        + ((_v[0] * 1068552L) >> 1)                 //+(  0.5095254495*v[0])
+        )+524288) >> 20;                            // round and downshift fixed point /1048576
+      _v[1]= (short)tmp;
+      return (short)(((_v[0] + _v[1])));            // 2^
+    }
+    if(_order==2)                                   //Alpha Low 0.1
+    {
+      _v[0] = _v[1];
+      _v[1] = _v[2];
+      long tmp = ((((data * 759505L) >>  4)         //= (    9.053999670e-2 * x)
+        + ((_v[0] * -1011418L) >> 3)                //+( -0.2411407388*v[0])
+        + ((_v[1] * 921678L) >> 1)                  //+(  0.8789807520*v[1])
+        )+262144) >> 19;                            // round and downshift fixed point /524288
+
+      _v[2]= (short)tmp;
+      return (short)(((_v[0] + _v[2])+2 * _v[1]));  // 2^
+    }
   }
+  
+/// Median filters
+    if(_filter=='m')  // New filters
+    {
+     // Note: 
+     //  quick & dirty dumb implementation that only keeps 3 samples: probably better to do insertion sort when more samples are needed in the calculation
+     //   or Partial sort: http://en.cppreference.com/w/cpp/algorithm/nth_element
+    if(_order==2)                                  
+    {
+      _v[0] = _v[1];
+      _v[1] = _v[2];
+      _v[2]= data;
+      
+      if (_v[2] < _v[1])
+      {
+        if (_v[2] < _v[0])
+        {
+          if (_v[1] < _v[0])
+          {
+            _median = _v[1];
+          }
+          else
+          {
+            _median = _v[0];
+          } 
+        }
+        else
+        {
+          _median = _v[2]; 
+        }
+      }
+      else
+      {
+        if (_v[2] < _v[0])
+        {
+            _median = _v[2];
+        }
+        else
+        {
+          if (_v[1] < _v[0])
+          {
+            _median = _v[0];
+          }
+          else
+          {
+            _median = _v[1];
+          }
+        }
+      }
+//    Serial.print(" ");
+//    Serial.print(_v[2]);
+//     
+//    Serial.print(" ");
+//    Serial.print(_v[1]);
+//     
+//    Serial.print(" ");
+//    Serial.print(_v[0]);
+//     
+//    Serial.print(" Median:");
+//    Serial.println(_median);
+//     return (_median);
+    }
+    }
+   
 }
+
