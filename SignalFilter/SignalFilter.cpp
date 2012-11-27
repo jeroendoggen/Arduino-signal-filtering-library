@@ -25,6 +25,15 @@
 /// Constructor
 SignalFilter::SignalFilter()
 {
+  _v[0]=0;
+  _v[1]=0;
+  _v[2]=0;
+  _helper=0; 
+  _counter=0;
+  _filter=0;
+  _order=0;
+  _average=0;
+  _median=0;
 }
 
 /// Begin function: set default filter options
@@ -32,10 +41,6 @@ void SignalFilter::begin()
 {
   setFilter('c');
   setOrder(1);
-  _v[0]=0;
-  _v[1]=0;
-  _v[2]=0;
-  _helper=0;
 }
 
 /// setFilter(char filter): Select filter: 'c' -> Chebyshev, 'b' -> Bessel
@@ -99,7 +104,7 @@ int SignalFilter::run(int data)
   }
 
 /// Bessel filters
-  if(_filter=='b')                                // Bessel filters
+  else if(_filter=='b')                                // Bessel filters
   {
     if(_order==1)                                 //Alpha Low 0.1
     {
@@ -125,7 +130,7 @@ int SignalFilter::run(int data)
   }
 
 /// Median filters (78 bytes, 12 microseconds)
-  if(_filter=='m')                                // New filters
+  else if(_filter=='m')                                // New filters
   {
 // Note:
 //  quick & dirty dumb implementation that only keeps 3 samples: probably better to do insertion sort when more samples are needed in the calculation
@@ -180,7 +185,7 @@ int SignalFilter::run(int data)
 //
 /// Median filter (148 bytes, 12 microseconds)
 // less efficient, but more readable?
-  if(_filter=='n')
+  else if(_filter=='n')
   {
     _v[0] = _v[1];
     _v[1] = _v[2];
@@ -202,7 +207,7 @@ int SignalFilter::run(int data)
 // based on: http://embeddedgurus.com/stack-overflow/tag/median-filter/
 // same code size as my median filter code
 
-  if(_filter=='0')
+  else if(_filter=='0')
   {
     _v[0] = _v[1];
     _v[1] = _v[2];
@@ -227,7 +232,7 @@ int SignalFilter::run(int data)
   
 //
 /// Growing-shrinking filter (fast)
-  if(_filter=='g')                                // New filters
+  else if(_filter=='g')                                // New filters
   {
     if (data > _helper)
     {
@@ -256,7 +261,7 @@ int SignalFilter::run(int data)
     return _helper;
   }
 /// Growing-shrinking filter (smoother)
-  if(_filter=='h')                                // New filters
+  else if(_filter=='h')                                // New filters
   {
     if (data > _helper)
     {
@@ -286,5 +291,5 @@ int SignalFilter::run(int data)
     Serial.print("  ");
     return _helper;
   }
-
+  return 0; //should never be reached
 }
