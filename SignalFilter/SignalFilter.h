@@ -42,6 +42,11 @@ class SignalFilter
 
   private:
 
+    int runChebyshev(int data);
+    int runBessel(int data);
+    int runMedian(int data);
+    int runGrowing(int data);
+    int runGrowing2(int data);
     char _filter;
     int _order;
     int _average;
@@ -49,6 +54,6 @@ class SignalFilter
     int _helper;
     int _counter;
 
-    short _v[3];
+    int _v[3];
 };
 #endif
