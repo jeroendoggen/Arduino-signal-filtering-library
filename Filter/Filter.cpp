@@ -36,6 +36,7 @@ Filter::Filter()
   _x[0]=0;
   _x[1]=0;
   _x[2]=0;
+  _average=0;
 }
 
 /// printSamples: Print out some samples (for debugging)
@@ -51,5 +52,3 @@ void Filter::printSamples()
   Serial.print(_x[0]);
   Serial.print(" - ");
 }
-
-

@@ -15,7 +15,6 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-
 #include <Arduino.h>
 #include <iirFilter.h>
 
@@ -34,11 +33,11 @@ void iirFilter::begin()
 
 int iirFilter::run(int data)
 {
-  // not an iirFilter implementation (just a placeholder)
-      _x[0] = _x[1];
-      long tmp = ((((data * 3269048L) >>  2)      //= (3.897009118e-1 * data)
-        + ((_x[0] * 3701023L) >> 3)               //+(  0.2205981765*v[0])
-        )+1048576) >> 21;                         // round and downshift fixed point /2097152
-      _x[1]= (int)tmp;
-      return (int)(_x[0] + _x[1]);              // 2^
+// not an iirFilter implementation (just a placeholder)
+  _x[0] = _x[1];
+  long tmp = ((((data * 3269048L) >>  2)          //= (3.897009118e-1 * data)
+    + ((_x[0] * 3701023L) >> 3)                   //+(  0.2205981765*v[0])
+    )+1048576) >> 21;                             // round and downshift fixed point /2097152
+  _x[1]= (int)tmp;
+  return (int)(_x[0] + _x[1]);                    // 2^
 }

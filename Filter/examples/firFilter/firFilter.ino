@@ -7,8 +7,8 @@ int filtered;
 
 void setup()
 {
-    Serial.begin(9600);
-    Filter.begin();
+  Serial.begin(9600);
+  Filter.begin();
 }
 
 void loop()
@@ -19,5 +19,5 @@ void loop()
   Serial.print(value);
   Serial.print(" - Out: ");
   Serial.println(filtered);
-  delay(500);                                 //make it readable
+  delay(500);                                     //make it readable
 }

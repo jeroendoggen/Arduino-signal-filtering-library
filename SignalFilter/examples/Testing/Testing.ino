@@ -6,7 +6,6 @@ int value;
 int filtered;
 unsigned long starttime,endtime,timedifference;
 
-
 void setup()
 {
   Serial.begin(115200);
@@ -22,12 +21,12 @@ void loop()
   filtered= Filter.run(value);
   endtime=micros();
   timedifference=endtime-starttime;
- // Serial.print("In: ");
+  // Serial.print("In: ");
   Serial.print(value);
   //Serial.print(" - Out: ");
   Serial.print(",");
   Serial.println(filtered);
-   Serial.print(" - Time: ");
-   Serial.println(timedifference);
+  Serial.print(" - Time: ");
+  Serial.println(timedifference);
   delay(100);                                     //make it readable
 }
