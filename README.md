@@ -1,27 +1,30 @@
 Arduino-signal-filtering-library
 ================================
 
-==Overview==
+Overview
+--------
 This project is a free initiative to create an Arduino library for signal filtering.
 
-Very short introduction to the filters: SignalFilteringBasics  
+Very short introduction to the filters: http://code.google.com/p/arduino-signal-filtering-library/wiki/SignalFilteringBasics
 
-Current filters:
-
+Available filters:
  * low pass filter (1st and 2nd order, Chebychev and Bessel)
  * median filter
 
-==Library Usage==
-  # Download the source
-  # Place the Filter folder in your Arduino1.0+ "libraries" folder
-  # Open example sketch: "file", "Examples", "!SignalFilter", "Bessel" (or any other example)
-  # Connect a (noisy) analog sensor to port A0
-  # Compile & upload code
-  # Original and filtered sensor data should be arriving over the serial port
+Library Usage
+-------------
+ * Download the source
+ * Place the Filter folder in your Arduino1.0+ "libraries" folder
+ * Open example sketch: "file", "Examples", "!SignalFilter", "Bessel" (or any other example)
+ * Connect a (noisy) analog sensor to port A0
+ * Compile & upload code
+ * Original and filtered sensor data should be arriving over the serial port
 
-===Version History:===                                                                                         
+Version History:
+----------------
  * Version 0.1: Low pass Chebychev and Bessel filters
  * Version 0.2: Median filter
 
-===Roadmap ===                                                                                                
+Roadmap:
+--------
  * Version 0.3+: More filters (band pass, running average, Kalman, ...)                                             
