@@ -4,7 +4,7 @@ Arduino library for signal filtering
 ### Overview
 This project is a free initiative to create an Arduino library for signal filtering.
 
- * Very short introduction to the filters: https://github.com/jeroendoggen/Arduino-signal-filtering-library/wiki/Signal-Filtering-Basics
+ * [Some information about the filters](https://github.com/jeroendoggen/Arduino-signal-filtering-library/wiki/Signal-Filtering-Basics)
  * Free ebook: "The Scientist and Engineer's Guide to Digital Signal Processing" http://www.dspguide.com/
 
 ### Available filters:
