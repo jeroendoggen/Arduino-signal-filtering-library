@@ -232,27 +232,27 @@ int SignalFilter::run(int data)
 
   // Chebyshev filters
   if(_filter=='c') {
-    runChebyshev(data);
+    return runChebyshev(data);
   }
 
   // Bessel filters
   else if(_filter=='b') {                         // Bessel filters
-    runBessel(data);
+    return runBessel(data);
   }
 
   // Median filters (78 bytes, 12 microseconds)
   else if(_filter=='m') {                         // New filters
-    runMedian(data);
+    return runMedian(data);
   }
 
   // Growing-shrinking filter (fast)
   else if(_filter=='g') {                         // New filters
-    runGrowing(data);
+    return runGrowing(data);
   }
 
   // Growing-shrinking filter (smoother)
   else if(_filter=='h') {                         // New filters
-    runGrowing2(data);
+    return runGrowing2(data);
   }
   return 0;                                       //should never be reached
 }
