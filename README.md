@@ -24,9 +24,9 @@ This library is partially based on filters that are auto-generated on the [filtu
 Filtuino is a Filter Suite that generates source code for different digital filters (IIR Lowpass, Highpass, Bandpass, Bandstop, IIR Resonanz Filter, Proportional Integral Filter).
 
 If you want your own filter properties, I suggest you:
- * Use my library as a template (to have a working code to start with)
- * Generate the filtering code on the filtuino website
- * Replace one of the filters with your own filter.
+ * Use my library as a template (to have some working code to start with)
+ * Generate the exact filtering code you need on the filtuino website (filter type, ripple, frequencies,...)
+ * Replace one of the filters in my library with your own custom filter.
 
 ### Version History:
  * Version 0.1: Low pass Chebychev and Bessel filters
