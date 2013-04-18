@@ -19,6 +19,15 @@ This project is a free initiative to create an Arduino library for signal filter
  * Compile & upload code
  * Original and filtered sensor data should be arriving over the serial port
 
+### Changing filters:
+This library is partially based on filters that are auto-generated on the [filtuino website](http://www.schwietering.com/jayduino/filtuino/).
+Filtuino is a Filter Suite that generates source code for different digital filters (IIR Lowpass, Highpass, Bandpass, Bandstop, IIR Resonanz Filter, Proportional Integral Filter).
+
+If you want your own filter properties, I suggest you:
+ * Use my library as a template (to have a working code to start with)
+ * Generate the filtering code on the filtuino website
+ * Replace one of the filters with your own filter.
+
 ### Version History:
  * Version 0.1: Low pass Chebychev and Bessel filters
  * Version 0.2: Median filter
