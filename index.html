@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Arduino-signal-filtering-library : Arduino library for signal filtering" />
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Arduino-signal-filtering-library by jeroendoggen</title>
+    <title>Arduino-signal-filtering-library</title>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>Arduino-signal-filtering-library</h1>
-        <h2>Arduino library for signal filtering</h2>
-        <a href="https://github.com/jeroendoggen/Arduino-signal-filtering-library" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h2>Arduino library for signal filtering</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jeroendoggen/Arduino-signal-filtering-library">View on GitHub</a>
 
-<h3>Overview</h3>
+          <h1 id="project_title">Arduino-signal-filtering-library</h1>
+          <h2 id="project_tagline">Arduino library for signal filtering</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jeroendoggen/Arduino-signal-filtering-library/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jeroendoggen/Arduino-signal-filtering-library/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
 
 <p>This project is a free initiative to create an Arduino library for signal filtering.</p>
 
@@ -38,12 +40,14 @@
 <li><a href="https://github.com/jeroendoggen/Arduino-signal-filtering-library/wiki/Signal-Filtering-Basics">Some information about the filters</a></li>
 <li>Free ebook: "The Scientist and Engineer's Guide to Digital Signal Processing" <a href="http://www.dspguide.com/">http://www.dspguide.com/</a>
 </li>
-</ul><h3>Available filters:</h3>
+</ul><h3>
+<a name="available-filters" class="anchor" href="#available-filters"><span class="octicon octicon-link"></span></a>Available filters:</h3>
 
 <ul>
 <li>low pass filter (1st and 2nd order, Chebychev and Bessel)</li>
 <li>median filter</li>
-</ul><h3>Library Usage</h3>
+</ul><h3>
+<a name="library-usage" class="anchor" href="#library-usage"><span class="octicon octicon-link"></span></a>Library Usage</h3>
 
 <ul>
 <li>Download the source</li>
@@ -52,37 +56,43 @@
 <li>Connect a (noisy) analog sensor to port A0</li>
 <li>Compile &amp; upload code</li>
 <li>Original and filtered sensor data should be arriving over the serial port</li>
-</ul><h3>Version History:</h3>
+</ul><h3>
+<a name="changing-filters" class="anchor" href="#changing-filters"><span class="octicon octicon-link"></span></a>Changing filters:</h3>
+
+<p>This library is partially based on filters that are auto-generated on the <a href="http://www.schwietering.com/jayduino/filtuino/">filtuino website</a>.
+Filtuino is a Filter Suite that generates source code for different digital filters (IIR Lowpass, Highpass, Bandpass, Bandstop, IIR Resonanz Filter, Proportional Integral Filter).</p>
+
+<p>If you want your own filter properties, I suggest you:</p>
+
+<ul>
+<li>Use my library as a template (to have some working code to start with)</li>
+<li>Generate the exact filtering code you need on the filtuino website (filter type, ripple, frequencies,...)</li>
+<li>Replace one of the filters in my library with your own custom filter.</li>
+</ul><h3>
+<a name="version-history" class="anchor" href="#version-history"><span class="octicon octicon-link"></span></a>Version History:</h3>
 
 <ul>
 <li>Version 0.1: Low pass Chebychev and Bessel filters</li>
 <li>Version 0.2: Median filter</li>
-</ul><h3>Roadmap:</h3>
+</ul><h3>
+<a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap:</h3>
 
 <ul>
 <li>Version 0.3+: More filters (band pass, running average, Kalman, ...)<br>
 </li>
 </ul>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/jeroendoggen/Arduino-signal-filtering-library/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/jeroendoggen/Arduino-signal-filtering-library/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/jeroendoggen/Arduino-signal-filtering-library"></a> is maintained by <a href="https://github.com/jeroendoggen">jeroendoggen</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
     </div>
 
-            <script type="text/javascript">
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Arduino-signal-filtering-library maintained by <a href="https://github.com/jeroendoggen">jeroendoggen</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -92,6 +102,7 @@
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
