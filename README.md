@@ -1,6 +1,4 @@
 # Arduino library for signal filtering
-
-## Overview
 The goals of this project is providing an Arduino library for basic signal filtering.
 These filters can be used to clean up noisy signals by suppressing small (fast) signal changes while passing bigger (slow) signal changes. 
 This is typically done by suppressing the "higher frequency" fluctuations.
