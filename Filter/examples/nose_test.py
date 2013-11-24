@@ -1,3 +1,9 @@
+""" 
+    Nose test: build all example by running one command: 'nosetests'
+        nose_test.py is copyright 2013 Jeroen Doggen.
+"""
+
+
 #!/usr/bin/env python
 #
 # nose_test.py is copyright 2013 Jeroen Doggen.
@@ -8,6 +14,7 @@ import shutil
 
 
 def test_build_examples():
+    """ Build all the .ino files in the Examples folder """
     failures = 0
     path = os.getcwd()
     for example in os.listdir(path):
@@ -22,6 +29,7 @@ def test_build_examples():
 
 
 def test_upload_examples():
+    """ Upload all the .ino files in the Examples folder to Arduino board """
     failures = 0
     path = os.getcwd()
     for example in os.listdir(path):
@@ -36,13 +44,21 @@ def test_upload_examples():
 
 
 def cleanup(example):
+    """ Clean up all scons files (hex, build,...) """
     if (os.path.exists("build")):
         shutil.rmtree("build")
 
     hexfile = example + ".hex"
-    if (os.path.exists(hexfile)):
-        os.remove(hexfile)
+    safe_remove(hexfile)
 
     elffile = example + ".elf"
-    if (os.path.exists(elffile)):
-        os.remove(elffile)
+    safe_remove(elffile)
+
+    sconsfile = ".sconsign.dblite"
+    safe_remove(sconsfile)
+
+
+def safe_remove(inputfile):
+    """ Remove 'inputfile' safely """
+    if (os.path.exists(inputfile)):
+        os.remove(inputfile)
