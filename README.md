@@ -37,9 +37,9 @@ To add your filters to the project:
  * Write a short 'readme_myfiltername.md' to describe your filter (place it in the 'Documention' folder) 
 
 ## Version History:
- * Version 0.3: OOP version, better documentation, various cleanup, MIT license,...
- * Version 0.2: Median filter
- * Version 0.1: Low pass Chebychev and Bessel filters
+ * Version 0.3.0: OOP version, better documentation, various cleanup, MIT license,...
+ * Version 0.2.0: Median filter
+ * Version 0.1.0: Low pass Chebychev and Bessel filters
 
 ## Roadmap:
- * Version 0.4+: More filters (band pass, moving average, Kalman, ...)                                             
+ * Version 0.3.1+: More filters (band pass, moving average, Kalman, ...)                                             
