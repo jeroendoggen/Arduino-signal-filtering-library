@@ -9,6 +9,7 @@
 Filter  KEYWORD1
 iirFilter  KEYWORD1
 firFilter  KEYWORD1
+newFilter  KEYWORD1
 
 ##############################################
 # Methods and Functions (KEYWORD2)

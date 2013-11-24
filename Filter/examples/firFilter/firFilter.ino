@@ -1,3 +1,6 @@
+// Arduino Signal Filtering Library
+// Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
+
 #include <firFilter.h>
 
 firFilter Filter;

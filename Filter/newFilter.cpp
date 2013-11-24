@@ -17,5 +17,5 @@ void newFilter::begin()
 /// Just a placeholder
 int newFilter::run(int data)
 {
-    return (data*2);  // Filter just return the double of the input sample
+  return (data*2);                                // Filter just return the double of the input sample
 }
