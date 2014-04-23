@@ -1,16 +1,16 @@
 // Arduino Signal Filtering Library
 // Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
 
-#include <iirFilter.h>
+#include <MedianFilter.h>
 
-iirFilter Filter;
+MedianFilter Filter;
 
 int value;
 int filtered;
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Filter.begin();
 }
 
@@ -22,5 +22,5 @@ void loop()
   Serial.print(value);
   Serial.print(" - Out: ");
   Serial.println(filtered);
-  delay(500);                                     //make it readable
+  delay(100);                                     //make it readable
 }

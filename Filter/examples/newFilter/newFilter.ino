@@ -1,16 +1,17 @@
-#include <SignalFilter.h>
+// Arduino Signal Filtering Library
+// Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
 
-SignalFilter Filter;
+#include <newFilter.h>
+
+newFilter Filter;
 
 int value;
 int filtered;
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Filter.begin();
-  Filter.setFilter('m');
-  Filter.setOrder(2);
 }
 
 void loop()
@@ -21,5 +22,5 @@ void loop()
   Serial.print(value);
   Serial.print(" - Out: ");
   Serial.println(filtered);
-  delay(100);                                     //make it readable
+  delay(500);                                     //make it readable
 }
