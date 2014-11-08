@@ -28,19 +28,19 @@ def test_build_examples():
     assert (failures == 0)
 
 
-def test_upload_examples():
-    """ Upload all the .ino files in the Examples folder to Arduino board """
-    failures = 0
-    path = os.getcwd()
-    for example in os.listdir(path):
-        if(os.path.isdir(example)):
-            os.chdir(example)
-            state = subprocess.call(["scons", "upload"])
-            if (state != 0):
-                failures += 1
-            cleanup(example)
-            os.chdir("../")
-    assert (failures == 0)
+#def test_upload_examples():
+    #""" Upload all the .ino files in the Examples folder to Arduino board """
+    #failures = 0
+    #path = os.getcwd()
+    #for example in os.listdir(path):
+        #if(os.path.isdir(example)):
+            #os.chdir(example)
+            #state = subprocess.call(["scons", "upload"])
+            #if (state != 0):
+                #failures += 1
+            #cleanup(example)
+            #os.chdir("../")
+    #assert (failures == 0)
 
 
 def cleanup(example):
