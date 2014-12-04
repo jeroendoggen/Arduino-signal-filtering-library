@@ -2,3 +2,5 @@
 *.hex
 *.elf
 *.dblite
+
+*.pyc
