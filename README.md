@@ -6,6 +6,7 @@ This is typically done by suppressing the "higher frequency" fluctuations.
 ## More info:
  * [Information about the filters](https://github.com/jeroendoggen/Arduino-signal-filtering-library/wiki/Signal-Filtering-Basics)
  * [Free ebook: "The Scientist and Engineer's Guide to Digital Signal Processing"] (http://www.dspguide.com)
+ * [Interactive digital filter design website](http://www-users.cs.york.ac.uk/~fisher/mkfilter/)
 
 ## Available filters:
  * Low pass filters: Chebychev and Bessel (1st and 2nd order)
