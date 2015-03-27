@@ -1,11 +1,11 @@
 // Arduino Signal Filtering Library
-// Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
+// Copyright 2012-2015 Jeroen Doggen (jeroendoggen@gmail.com)
 
 #include <Arduino.h>
-#include <MedianFilter.h>
+#include <medianFilter.h>
 
 /// Constructor
-MedianFilter::MedianFilter()
+medianFilter::medianFilter()
 {
   _x[0]=0;
   _x[1]=0;
@@ -14,12 +14,12 @@ MedianFilter::MedianFilter()
 }
 
 /// Begin function: set default filter options
-void MedianFilter::begin()
+void medianFilter::begin()
 {
 }
 
 /// Just a placeholder
-int MedianFilter::run(int data)
+int medianFilter::run(int data)
 {
   // Note:
   //  quick & dirty dumb implementation that only keeps 3 samples: probably better to do insertion sort when more samples are needed in the calculation
@@ -64,7 +64,7 @@ int MedianFilter::run(int data)
 
 // Median filter (148 bytes, 12 microseconds)
 // less efficient, but more readable?
-//   int MedianFilter::run(int data)
+//   int medianFilter::run(int data)
 //   {
 //     _x[0] = _x[1];
 //     _x[1] = _x[2];
@@ -86,7 +86,7 @@ int MedianFilter::run(int data)
 // based on: http://embeddedgurus.com/stack-overflow/tag/median-filter/
 // same code size as my median filter code
 
-//   int MedianFilter::run(int data)
+//   int medianFilter::run(int data)
 //   {
 //     _x[0] = _x[1];
 //     _x[1] = _x[2];
@@ -108,5 +108,19 @@ int MedianFilter::run(int data)
 //     }
 //     return middle;
 //   }
+
+/// printSamples: Print out some samples (for debugging)
+void medianFilter::printSamples()
+{
+  Serial.print(" ");
+  Serial.print(_x[2]);
+
+  Serial.print(" ");
+  Serial.print(_x[1]);
+
+  Serial.print(" ");
+  Serial.print(_x[0]);
+  Serial.print(" - ");
+}
 
 
