@@ -11,9 +11,10 @@ class firFilter : public Filter
   public:
     firFilter();
     void begin();
-
+    
     int run(int data);
-
+    void printSamples();
   private:
+    int _x[3];
 };
 #endif

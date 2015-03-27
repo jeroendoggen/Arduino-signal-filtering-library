@@ -15,6 +15,7 @@ class iirFilter : public Filter
     int run(int data);
 
   private:
+    int _x[3];
     int _y[3];
 };
 #endif

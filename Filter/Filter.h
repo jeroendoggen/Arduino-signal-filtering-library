@@ -12,12 +12,7 @@ class Filter
   public:
     Filter();
 
-  protected:
-    int _average;
-    int _x[3];
-
-  private:
     virtual int run(int data)=0;
-    void printSamples();
+    virtual void printSamples()=0;
 };
 #endif
