@@ -37,6 +37,12 @@ To add your filters to the project:
  * Follow the procedure to create your own filter
  * Write a short 'readme_myfiltername.md' to describe your filter (place it in the 'Documention' folder) 
 
+### Similar projects:
+ * http://playground.arduino.cc/Main/RunningMedian
+ * http://playground.arduino.cc/Main/runningAverage
+ * http://playground.arduino.cc/Main/DigitalSmooth
+ * http://playground.arduino.cc/main/average
+
 ## Version History:
  * Version 0.3.0: OOP version, better documentation, various cleanup, MIT license,...
  * Version 0.2.0: Median filter
