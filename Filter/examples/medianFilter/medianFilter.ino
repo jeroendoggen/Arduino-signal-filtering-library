@@ -1,9 +1,9 @@
-// Arduino Signal Filtering Library
-// Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
+// Arduino Signal Filtering Library: median filter example
+// Copyright 2012-2015 Jeroen Doggen (jeroendoggen@gmail.com)
 
-#include <MedianFilter.h>
+#include <medianFilter.h>
 
-MedianFilter Filter;
+medianFilter Filter;
 
 int value;
 int filtered;

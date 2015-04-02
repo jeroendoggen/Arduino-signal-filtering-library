@@ -1,5 +1,5 @@
 // Arduino Signal Filtering Library
-// Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
+// Copyright 2012-2015 Jeroen Doggen (jeroendoggen@gmail.com)
 
 #include <Arduino.h>
 #include <newFilter.h>

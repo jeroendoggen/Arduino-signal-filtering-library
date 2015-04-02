@@ -1,5 +1,5 @@
 // Arduino Signal Filtering Library
-// Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
+// Copyright 2012-2015 Jeroen Doggen (jeroendoggen@gmail.com)
 
 /// SignalFilter - Library to Filter Sensor Data using digital filters
 /// Available filters: Chebyshev & Bessel low pass filter (1st & 2nd order)

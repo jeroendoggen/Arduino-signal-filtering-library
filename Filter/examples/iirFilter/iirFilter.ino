@@ -1,5 +1,5 @@
-// Arduino Signal Filtering Library
-// Copyright 2012-2013 Jeroen Doggen (jeroendoggen@gmail.com)
+// Arduino Signal Filtering Library: fir filter example
+// Copyright 2012-2015 Jeroen Doggen (jeroendoggen@gmail.com)
 
 #include <iirFilter.h>
 
