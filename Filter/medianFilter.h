@@ -1,20 +1,22 @@
 // Arduino Signal Filtering Library
 // Copyright 2012-2015 Jeroen Doggen (jeroendoggen@gmail.com)
 
-#ifndef newFilter_h
-#define newFilter_h
+#ifndef medianFilter_h
+#define medianFilter_h
 #include <Arduino.h>
 #include <Filter.h>
 
-class newFilter : public Filter
+class medianFilter : public Filter
 {
   public:
-    newFilter();
+    medianFilter();
     void begin();
 
     int run(int data);
+    void printSamples();
 
   private:
-    int _y[3];
+    int _x[3];
+    int _median;
 };
 #endif
